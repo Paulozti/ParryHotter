@@ -12,7 +12,7 @@ public class Fire : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag != "Fire")
+        if (collision.gameObject.tag != "Fire1" && collision.gameObject.tag != "Fire2")
         {
             Destroy(this.gameObject);
         }

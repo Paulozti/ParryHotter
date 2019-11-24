@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3215040540259229214}
   - component: {fileID: 3215040540259229215}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3215040540259229208}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4868062, y: -1.3223252, z: 6.0715733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -226,6 +226,13 @@ MonoBehaviour:
   - {fileID: 3379925136134692128}
   - {fileID: 3379925136279475140}
   - {fileID: 3379925134404037435}
+  playerLife: {fileID: 0}
+  lifesSprites:
+  - {fileID: 2800000, guid: 3f53fb29fadbf5b41b0102c50a166fa5, type: 3}
+  - {fileID: 2800000, guid: e53bb215b8ae72e4bba9dd1c90586e74, type: 3}
+  - {fileID: 2800000, guid: 0644dda13e3dd924b8d532d5a02b2643, type: 3}
+  - {fileID: 2800000, guid: 62a684227cf8cae47923dd09886ff518, type: 3}
+  UI: {fileID: 0}
   _moveSpeed: 4
   _jumpForce: 200
 --- !u!1 &3215040540623973306

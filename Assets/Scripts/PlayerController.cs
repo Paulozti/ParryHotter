@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public Player player;
 
     public GameObject[] target;
+    public RawImage playerLife;
+    public Texture[] lifesSprites;
+    public UIManager UI;
 
     //Private
     [SerializeField]
@@ -33,12 +37,27 @@ public class PlayerController : MonoBehaviour
     private string _verticalAxis;
     private int _directionToShoot = 0;
     private int _targetPosition = 0;
+    private int _life = 3;
     
     
 
     void Start()
     {
         _rigidb2 = GetComponent<Rigidbody2D>();
+        playerConfig();
+        target[3].SetActive(true);
+        StartCoroutine(automaticShooting());
+    }
+
+    void Update()
+    {
+      
+        inputCheck();
+        move();
+    }
+
+    void playerConfig()
+    {
         if (player == Player.Player1)
         {
             skin[0].SetActive(true);
@@ -55,15 +74,6 @@ public class PlayerController : MonoBehaviour
             _horizontalAxis = "Horizontal2";
             _verticalAxis = "Vertical2";
         }
-        target[3].SetActive(true);
-        StartCoroutine(automaticShooting());
-    }
-
-    void Update()
-    {
-      
-        inputCheck();
-        move();
     }
 
     void inputCheck() 
@@ -179,14 +189,57 @@ public class PlayerController : MonoBehaviour
             }
             if(player == Player.Player1)
             {
+                fire.tag = "Fire1";
                 fire.Shoot(_directionToShoot, 1);
             }
             else
             {
+                fire.tag = "Fire2";
                 fire.Shoot(_directionToShoot, 2);
             }
             
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Fire2" && player == Player.Player1)
+        {
+            damage(Player.Player2);
+        }
+        if (collision.gameObject.tag == "Fire1" && player == Player.Player2)
+        {
+            damage(Player.Player1);
+        }
+    }
+
+    void damage(Player playerVencedor)
+    {
+        _life -= 1;
+        Update_life_UI();
+        if (_life == 0)
+        {
+            UI.GameOver(playerVencedor);
+        }
+    }
+
+    public void Update_life_UI()
+    {
+        switch (_life)
+        {
+            case 3:
+                playerLife.texture = lifesSprites[3];
+                break;
+            case 2:
+                playerLife.texture = lifesSprites[2];
+                break;
+            case 1:
+                playerLife.texture = lifesSprites[1];
+                break;
+            case 0:
+                playerLife.texture = lifesSprites[0];
+                break;
+        }
+        
+    }
 }
